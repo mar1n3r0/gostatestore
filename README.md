@@ -14,8 +14,8 @@
 
 * #### Store:
   * ` gostatestore.NewStore() `: Create read and write channels, start listener goroutine and wait for the other routines
-  * ` godux.Reader(interface{}) `: Works with any type passed as a memory address ex. &User{Name: "test", Username: "tester"}
-  * ` godux.Writer(interface{}) `: Works with any type passed as a memory address ex. &User{Name: "test", Username: "tester"}
+  * ` gostatestore.Reader(interface{}) `: Works with any type passed as a memory address ex. &User{Name: "test", Username: "tester"}
+  * ` gostatestore.Writer(interface{}) `: Works with any type passed as a memory address ex. &User{Name: "test", Username: "tester"}
 
 ### License
 MIT License.
