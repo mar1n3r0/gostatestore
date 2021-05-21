@@ -47,9 +47,9 @@ func Listener() {
 func Reader(f interface{}) {
 	e := reflect.ValueOf(f)
 	if e.Kind() != reflect.Ptr {
-		panic("f must be a pointer")
+		return
 	}
-	en := reflect.Indirect(e)
+	// en := reflect.Indirect(e)
 
 	wg.Add(1)
 	go func() {
@@ -63,11 +63,18 @@ func Reader(f interface{}) {
 		reply := <-read.resp
 		////--- Extract Value without specifying Type
 		if &reply != nil {
-			e.Elem().Set(reflect.ValueOf(reply).Elem())
-			for i := 0; i < en.NumField(); i++ {
-				varName := en.Type().Field(i).Name
-				varType := en.Type().Field(i).Type
-				varValue := en.Field(i).Interface()
+			r := reflect.ValueOf(reply)
+			if r.Kind() != reflect.Ptr {
+				return
+			}
+			rn := reflect.Indirect(r)
+			for i := 0; i < rn.NumField(); i++ {
+				varName := rn.Type().Field(i).Name
+				varType := rn.Type().Field(i).Type
+				varValue := rn.Field(i).Interface()
+				if !reflect.ValueOf(varValue).IsZero() {
+					e.Elem().Set(reflect.ValueOf(reply).Elem())
+				}
 				fmt.Printf("read key: %s, struct: %v, struct field: %v struct field type: %v struct field value: %v\n", read.key, e.Type(), varName, varType, varValue)
 			}
 		}
@@ -78,7 +85,7 @@ func Reader(f interface{}) {
 func Writer(f interface{}) {
 	e := reflect.ValueOf(f)
 	if e.Kind() != reflect.Ptr {
-		panic("f must be a pointer")
+		return
 	}
 	en := reflect.Indirect(e)
 	wg.Add(1)
