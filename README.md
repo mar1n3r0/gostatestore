@@ -7,8 +7,9 @@
 * Creates read and write channel
 * Creates a long running listener goroutine and short-lived read and write goroutines.
 * Updates state map with any type you pass as interface.
-* Reader uses the data type as a state key and stores the value.
-* Writer retrieves the value by data type as state key.
+* Currently state map is flat under key "store" and can't handle more complex cases yet
+* Reader should optimally use the data type as a state key and store the corresponding value.
+* Writer should optimally retrieve the value by data type as state key.
 
 ### API Reference
 

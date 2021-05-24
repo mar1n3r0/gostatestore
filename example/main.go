@@ -23,6 +23,11 @@ func main() {
 		Username: "tester2",
 	}
 	store.Writer(&user2)
+	user3 := User{
+		Name:     "test3",
+		Username: "tester3",
+	}
+	store.Writer(&user3)
 
 	time.Sleep(time.Second * 1)
 	fmt.Println("User.Name after: " + user.Name)
