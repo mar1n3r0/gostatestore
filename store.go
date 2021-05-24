@@ -49,7 +49,6 @@ func Reader(f interface{}) {
 	if e.Kind() != reflect.Ptr {
 		return
 	}
-	// en := reflect.Indirect(e)
 
 	wg.Add(1)
 	go func() {
