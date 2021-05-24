@@ -87,6 +87,7 @@ func Writer(f interface{}) {
 		return
 	}
 	en := e.Elem()
+	fmt.Println(en)
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
