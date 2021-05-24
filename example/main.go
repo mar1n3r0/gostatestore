@@ -13,10 +13,7 @@ type User struct {
 }
 
 func main() {
-	user := User{
-		Name:     "test",
-		Username: "tester",
-	}
+	user := User{}
 	fmt.Println("User.Name before: " + user.Name)
 	fmt.Println("User.Username before: " + user.Username)
 	store.NewStore()
