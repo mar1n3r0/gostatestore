@@ -86,7 +86,7 @@ func Writer(f interface{}) {
 	if e.Kind() != reflect.Ptr {
 		return
 	}
-	en := reflect.Indirect(e)
+	en := e.Elem()
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
