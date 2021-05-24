@@ -56,7 +56,7 @@ func Reader(f interface{}) {
 		fmt.Println("reading")
 
 		read := readOp{
-			key:  e.Type().String(),
+			key:  "store",
 			resp: make(chan interface{})}
 		reads <- read
 		reply := <-read.resp
@@ -67,7 +67,6 @@ func Reader(f interface{}) {
 				return
 			}
 			rn := r.Elem()
-			fmt.Println(rn)
 			for i := 0; i < rn.NumField(); i++ {
 				varName := rn.Type().Field(i).Name
 				varType := rn.Type().Field(i).Type
@@ -98,7 +97,7 @@ func Writer(f interface{}) {
 		fmt.Println("writing")
 
 		write := writeOp{
-			key:  e.Type().String(),
+			key:  "store",
 			val:  f,
 			resp: make(chan bool)}
 		writes <- write
