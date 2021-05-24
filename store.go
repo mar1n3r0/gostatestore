@@ -66,7 +66,8 @@ func Reader(f interface{}) {
 		if r.Kind() != reflect.Ptr {
 			return
 		}
-		rn := reflect.Indirect(r)
+		rn := r.Elem()
+		fmt.Println(rn)
 		for i := 0; i < rn.NumField(); i++ {
 			varName := rn.Type().Field(i).Name
 			varType := rn.Type().Field(i).Type
